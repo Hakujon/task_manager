@@ -18,8 +18,8 @@ class Task:
             self.updatedAt: str = str(datetime.now())
         elif len(args) == 5:
             self.id: int = args[0]
-            self.description: str = args[1]
-            self.status: str = args[2]
+            self.status: str = args[1]
+            self.description: str = args[2]
             self.createdAt: str = args[3]
             self.updatedAt: str = args[4]
 
@@ -44,8 +44,8 @@ class Task:
             'id': self.id,
             'status': self.status,
             'description': self.description,
-            'createdAd': self.createdAt,
-            'updatedAd': self.updatedAt,
+            'createdAt': self.createdAt,
+            'updatedAt': self.updatedAt,
         }
 
     @classmethod
