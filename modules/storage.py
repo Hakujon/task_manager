@@ -41,9 +41,11 @@ class DatafileStorage:
         with open(cls.__file_path, 'w+') as file:
             json.dump(dict_of_tasks, file)
 
-    def update_task_by_id(self, id: int, new_descr: str):
+    def update_task_by_id(self, id: int, **kwargs):
         task: Task = self.get_task_by_id(id)
-        task.update_task(description=new_descr)
+        print(task, 'eto storage')
+        print(kwargs, 'eto storage')
+        task.update_task(kwargs)
 
     def close(self):
         self.reload()

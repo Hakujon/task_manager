@@ -24,20 +24,26 @@ class Task:
             self.updatedAt: str = args[4]
 
     def update_task(self, *args, **kwargs):
-        self.updatedAt = datetime.now()
+        print(args, 'eto task')
+        print(kwargs, 'eto task')
+        self.updatedAt = str(datetime.now())
         for key, value in kwargs.items():
+            print(key, value)
             match (key, value):
-                case('description', description):
-                    self.description = description
+                case('description', value):
 
-                case('status', status):
-                    self.status = status
+                    self.description = value
 
-                case('createdAt', createdAt):
-                    self.createdAt = createdAt
+                case('status', value):
+                    self.status = value
 
-                case('updatedAt', updatedAt):
-                    self.updatedAt = updatedAt
+                case('createdAt', value):
+                    self.createdAt = value
+
+                case('updatedAt', value):
+                    self.updatedAt = value
+                case ():
+                    raise ValueError
 
     def transform_to_dict(self):
         return {

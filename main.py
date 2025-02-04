@@ -35,13 +35,12 @@ class TaskManagerShell(cmd.Cmd):
             print(task)
 
     def do_update(self, args):
-        args = args.split()
-        id = int(args[0])
-        description = args[1].replace('"', '')
-        print(args)
-        print(id)
-        print(description)
-        Storage().update_task_by_id(id, new_descr=description)
+        try:
+            id = int(args[0])
+            description = args.split('"')[1]
+            Storage().update_task_by_id(id, description=description)
+        except ValueError:
+            print('write the right statement')
 
 
 if __name__ == "__main__":
