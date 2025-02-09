@@ -12,7 +12,7 @@ class Task:
         if len(args) == 1:
             self.make_next_id()
             self.id: int = self.__num_id
-            self.description: str = args[0]
+            self.description: str = args[0].replace('"', '')
             self.status: str = 'to-do'
             self.createdAt: str = str(datetime.now())
             self.updatedAt: str = str(datetime.now())
@@ -24,11 +24,8 @@ class Task:
             self.updatedAt: str = args[4]
 
     def update_task(self, *args, **kwargs):
-        print(args, 'eto task')
-        print(kwargs, 'eto task')
         self.updatedAt = str(datetime.now())
         for key, value in kwargs.items():
-            print(key, value)
             match (key, value):
                 case('description', value):
 
