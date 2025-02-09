@@ -64,6 +64,10 @@ class TaskManagerShell(cmd.Cmd):
         except ValueError:
             print('write the right statement')
 
+    def do_delete(self, args):
+        id = int(args[0])
+        Storage().delete_task_by_id(id)
+
 
 if __name__ == "__main__":
     TaskManagerShell().cmdloop()
