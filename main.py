@@ -6,7 +6,7 @@ from modules.storage import DatafileStorage as Storage
 greetings = """
 Good day, \n
 My dear friend!"""
-statuses = ['to-do', 'in process', 'done']
+statuses = ['to-do', 'in-process', 'done']
 
 
 class TaskManagerShell(cmd.Cmd):
@@ -30,9 +30,31 @@ class TaskManagerShell(cmd.Cmd):
         return True
 
     def do_show(self, args):
-        all_tasks: dict = Storage().show_all_task()
-        for task in all_tasks.values():
+        choosen_tasks = {}
+        args = args.split()
+        if not args:
+            choosen_tasks: dict = Storage().show_all_task()
+        elif len(args) == 1 and args[0] in statuses:
+            choosen_tasks: dict = Storage().show_by_status(args[0])
+        else:
+            print("""you need to write show in formates:
+                  -show
+                  -show {status}
+                  where status from ['to-do', 'in-process', 'done'""")
+        for task in choosen_tasks.values():
             print(task)
+
+    def do_mark_to_do(self, args):
+        id = int(args[0])
+        Storage().update_task_by_id(id, status="to-do")
+
+    def do_mark_in_progress(self, args):
+        id = int(args[0])
+        Storage().update_task_by_id(id, status="in-process")
+
+    def do_mark_done(self, args):
+        id = int(args[0])
+        Storage().update_task_by_id(id, status="done")
 
     def do_update(self, args):
         try:
